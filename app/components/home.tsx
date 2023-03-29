@@ -102,7 +102,7 @@ export function ChatList() {
       state.currentSessionIndex,
       state.selectSession,
       state.removeSession,
-    ]
+    ],
   );
 
   return (
@@ -193,7 +193,7 @@ export function Chat(props: { showSideBar?: () => void }) {
       setPromptHints(promptStore.search(text));
     },
     100,
-    { leading: true, trailing: true }
+    { leading: true, trailing: true },
   );
 
   const onPromptSelect = (prompt: Prompt) => {
@@ -268,31 +268,7 @@ export function Chat(props: { showSideBar?: () => void }) {
   const [autoScroll, setAutoScroll] = useState(false);
 
   // preview messages
-  const messages = (session.messages as RenderMessage[])
-    .concat(
-      isLoading
-        ? [
-            {
-              role: "assistant",
-              content: "……",
-              date: new Date().toLocaleString(),
-              preview: true,
-            },
-          ]
-        : []
-    )
-    .concat(
-      userInput.length > 0
-        ? [
-            {
-              role: "user",
-              content: userInput,
-              date: new Date().toLocaleString(),
-              preview: true,
-            },
-          ]
-        : []
-    );
+  const messages = session.messages as RenderMessage[];
 
   // auto scroll
   useLayoutEffect(() => {
@@ -431,6 +407,12 @@ export function Chat(props: { showSideBar?: () => void }) {
       <div className={styles["chat-input-panel"]}>
         <PromptHints prompts={promptHints} onPromptSelect={onPromptSelect} />
         <div className={styles["chat-input-panel-inner"]}>
+          {/* <div
+            className={styles["chat-message-stop-action"]}
+            onClick={() => onUserStop()}
+          >
+            {Locale.Chat.Actions.Stop}
+          </div> */}
           <textarea
             ref={inputRef}
             className={styles["chat-input"]}
@@ -553,7 +535,7 @@ export function Home() {
       state.newSession,
       state.currentSessionIndex,
       state.removeSession,
-    ]
+    ],
   );
   const loading = !useHasHydrated();
   const [showSideBar, setShowSideBar] = useState(true);
@@ -578,9 +560,9 @@ export function Home() {
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
       >
         <div className={styles["sidebar-header"]}>
-          <div className={styles["sidebar-title"]}>ChatGPT Next</div>
+          <div className={styles["sidebar-title"]}>MOSS</div>
           <div className={styles["sidebar-sub-title"]}>
-            Build your own AI assistant.
+            你好，我是MOSS，是新一代AI.
           </div>
           <div className={styles["sidebar-logo"]}>
             <ChatGptIcon />
